@@ -1,5 +1,6 @@
 
 from pathlib import Path
+import dj_database_url
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -73,14 +74,9 @@ AUTH_USER_MODEL = 'accounts.User'
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'new_hrms_db',
-        'USER': 'hrms_user',
-        'PASSWORD': 'Kenya@2024',
-        'HOST': 'localhost',
-        'PORT': '5432',
-    }
+    'default': dj_database_url.config(
+        default='postgresql://hrms_user:Kenya@2024@localhost/new_hrms_db'
+    )
 }
 
 # Password validation
