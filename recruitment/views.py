@@ -7,10 +7,7 @@ from django.contrib.auth.decorators import login_required
 # 📌 JOB LIST
 def job_list(request):
     jobs = Job.objects.filter(is_active=True)
-
-    return render(request, "recruitment/job_list.html", {
-        "jobs": jobs
-    })
+    return render(request, "recruitment/job_list.html", {"jobs": jobs})
 
 
 # 📌 JOB DETAIL
