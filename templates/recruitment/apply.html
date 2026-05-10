@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apply for Position</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        body{
+            background: #f4f7fb;
+        }
+
+        .glass-card{
+            background: rgba(255,255,255,0.9);
+            backdrop-filter: blur(10px);
+        }
+    </style>
+</head>
+
+<body class="min-h-screen">
+
+<!-- TOP NAV -->
+<div class="bg-gradient-to-r from-indigo-700 to-blue-700 shadow-lg">
+
+    <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
+
+        <div>
+            <h1 class="text-3xl font-bold text-white">
+                HRMS Careers
+            </h1>
+
+            <p class="text-blue-100 text-sm mt-1">
+                Professional Recruitment Platform
+            </p>
+        </div>
+
+        <div class="hidden md:flex items-center gap-6 text-white text-sm">
+            <a href="#" class="hover:text-blue-200 transition">Jobs</a>
+            <a href="#" class="hover:text-blue-200 transition">Dashboard</a>
+            <a href="#" class="hover:text-blue-200 transition">Support</a>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- HERO -->
+<section class="bg-gradient-to-r from-blue-800 to-indigo-800 py-14">
+
+    <div class="max-w-6xl mx-auto px-6">
+
+        <div class="text-center">
+
+            <span class="bg-white/20 text-white px-5 py-2 rounded-full text-sm font-semibold">
+                Enterprise Hiring Portal
+            </span>
+
+            <h1 class="text-5xl font-extrabold text-white mt-6 leading-tight">
+                Apply For Your Dream Career
+            </h1>
+
+            <p class="text-blue-100 mt-5 text-lg max-w-3xl mx-auto">
+                Complete your professional profile and submit your application
+                through our intelligent recruitment management platform.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- APPLICATION FORM -->
+<div class="max-w-6xl mx-auto px-6 py-14">
+
+    <div class="glass-card rounded-3xl shadow-2xl overflow-hidden border border-gray-100">
+
+        <!-- HEADER -->
+        <div class="bg-white border-b px-10 py-8">
+
+            <div class="flex items-center justify-between flex-wrap gap-4">
+
+                <div>
+                    <h2 class="text-3xl font-bold text-gray-800">
+                        Candidate Application Form
+                    </h2>
+
+                    <p class="text-gray-500 mt-2">
+                        Please complete all required information carefully.
+                    </p>
+                </div>
+
+                <div class="bg-blue-100 text-blue-700 px-5 py-3 rounded-2xl font-semibold">
+                    Secure Application
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- FORM -->
+        <form method="POST"
+              enctype="multipart/form-data"
+              class="p-10 space-y-14">
+
+            {% csrf_token %}
+
+            <!-- PERSONAL DETAILS -->
+            <div>
+
+                <div class="flex items-center gap-3 mb-8">
+
+                    <div class="w-12 h-12 bg-blue-600 rounded-2xl flex items-center justify-center text-white font-bold text-lg">
+                        1
+                    </div>
+
+                    <div>
+                        <h2 class="text-2xl font-bold text-gray-800">
+                            Personal Information
+                        </h2>
+
+                        <p class="text-gray-500 text-sm">
+                            Basic candidate information
+                        </p>
+                    </div>
+
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-6">
+
+                    <input type="text" name="full_name"
+                        placeholder="Full Name"
+                        class="border border-gray-200 focus:border-blue-600 focus:ring-2 focus:ring-blue-200 p-4 rounded-2xl outline-none transition">
+
+                    <input type="email" name="email"
+                        placeholder="Email Address"
+                        class="border border-gray-200 focus:border-blue-600 focus:ring-2 focus:ring-blue-200 p-4 rounded-2xl outline-none transition">
+                    
+                    <input type="date" name="date_of_birth"
+                        class="border border-gray-200 focus:border-blue-600 focus:ring-2 focus:ring-blue-200 p-4 rounded-2xl outline-none transition">
+
+                    <input type="text" name="phone"
+                        placeholder="Phone Number"
+                        class="border border-gray-200 focus:border-blue-600 focus:ring-2 focus:ring-blue-200 p-4 rounded-2xl outline-none transition">
+
+                    <input type="text" name="location"
+                        placeholder="Current Location"
+                        class="border border-gray-200 focus:border-blue-600 focus:ring-2 focus:ring-blue-200 p-4 rounded-2xl outline-none transition">
+
+                    <select name="gender"
+                        class="border border-gray-200 focus:border-blue-600 focus:ring-2 focus:ring-blue-200 p-4 rounded-2xl outline-none transition">
+
+                        <option value="">Select Gender</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+
+                    </select>
+                </div>
+
+            </div>
+
+            <!-- EDUCATION -->
+            <div>
+
+                <div class="flex items-center gap-3 mb-8">
+
+                    <div class="w-12 h-12 bg-indigo-600 rounded-2xl flex items-center justify-center text-white font-bold text-lg">
+                        2
+                    </div>
+
+                    <div>
+                        <h2 class="text-2xl font-bold text-gray-800">
+                            Education & Experience
+                        </h2>
+
+                        <p class="text-gray-500 text-sm">
+                            Academic and career background
+                        </p>
+                    </div>
+
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-6 mb-6">
+
+                    <input type="text" name="institution"
+                        placeholder="Institution / University"
+                        class="border border-gray-200 p-4 rounded-2xl focus:border-indigo-600 focus:ring-2 focus:ring-indigo-200 outline-none transition">
+
+                    <input type="text" name="qualification"
+                        placeholder="Qualification"
+                        class="border border-gray-200 p-4 rounded-2xl focus:border-indigo-600 focus:ring-2 focus:ring-indigo-200 outline-none transition">
+
+                    <input type="text" name="graduation_year"
+                        placeholder="Graduation Year"
+                        class="border border-gray-200 p-4 rounded-2xl focus:border-indigo-600 focus:ring-2 focus:ring-indigo-200 outline-none transition">
+
+                    <input type="text" name="current_position"
+                        placeholder="Current Position"
+                        class="border border-gray-200 p-4 rounded-2xl focus:border-indigo-600 focus:ring-2 focus:ring-indigo-200 outline-none transition">
+
+                </div>
+
+                <textarea name="experience"
+                    rows="5"
+                    placeholder="Describe your professional experience..."
+                    class="border border-gray-200 p-4 rounded-2xl w-full focus:border-indigo-600 focus:ring-2 focus:ring-indigo-200 outline-none transition"></textarea>
+
+            </div>
+
+            <!-- CERTIFICATIONS -->
+            <div>
+
+                <div class="flex items-center gap-3 mb-8">
+
+                    <div class="w-12 h-12 bg-emerald-600 rounded-2xl flex items-center justify-center text-white font-bold text-lg">
+                        3
+                    </div>
+
+                    <div>
+                        <h2 class="text-2xl font-bold text-gray-800">
+                            Certifications & Memberships
+                        </h2>
+
+                        <p class="text-gray-500 text-sm">
+                            Professional certifications and affiliations
+                        </p>
+                    </div>
+
+                </div>
+
+                <div class="space-y-5">
+
+                    <textarea name="certifications"
+                        rows="4"
+                        placeholder="Professional Certifications"
+                        class="border border-gray-200 p-4 rounded-2xl w-full focus:border-emerald-600 focus:ring-2 focus:ring-emerald-200 outline-none transition"></textarea>
+
+                    <textarea name="memberships"
+                        rows="4"
+                        placeholder="Professional Memberships"
+                        class="border border-gray-200 p-4 rounded-2xl w-full focus:border-emerald-600 focus:ring-2 focus:ring-emerald-200 outline-none transition"></textarea>
+
+                </div>
+
+            </div>
+
+            <!-- REFEREES -->
+            <div>
+
+                <div class="flex items-center gap-3 mb-8">
+
+                    <div class="w-12 h-12 bg-orange-500 rounded-2xl flex items-center justify-center text-white font-bold text-lg">
+                        4
+                    </div>
+
+                    <div>
+                        <h2 class="text-2xl font-bold text-gray-800">
+                            Referees
+                        </h2>
+
+                        <p class="text-gray-500 text-sm">
+                            Provide professional references
+                        </p>
+                    </div>
+
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-6">
+
+                    <input type="text" name="referee_name"
+                        placeholder="Referee Name"
+                        class="border border-gray-200 p-4 rounded-2xl focus:border-orange-500 focus:ring-2 focus:ring-orange-200 outline-none transition">
+
+                    <input type="text" name="referee_phone"
+                        placeholder="Referee Phone"
+                        class="border border-gray-200 p-4 rounded-2xl focus:border-orange-500 focus:ring-2 focus:ring-orange-200 outline-none transition">
+
+                    <input type="email" name="referee_email"
+                        placeholder="Referee Email"
+                        class="border border-gray-200 p-4 rounded-2xl focus:border-orange-500 focus:ring-2 focus:ring-orange-200 outline-none transition">
+
+                </div>
+
+            </div>
+
+            <!-- FILES -->
+            <div>
+
+                <div class="flex items-center gap-3 mb-8">
+
+                    <div class="w-12 h-12 bg-pink-600 rounded-2xl flex items-center justify-center text-white font-bold text-lg">
+                        5
+                    </div>
+
+                    <div>
+                        <h2 class="text-2xl font-bold text-gray-800">
+                            Upload Documents
+                        </h2>
+
+                        <p class="text-gray-500 text-sm">
+                            Submit your CV and supporting documents
+                        </p>
+                    </div>
+
+                </div>
+
+                <div class="bg-gray-50 border-2 border-dashed border-gray-300 rounded-3xl p-8">
+
+                    <label class="font-semibold text-gray-700 block mb-3">
+                        Upload CV / Resume
+                    </label>
+
+                    <input type="file" name="cv"
+                        class="border bg-white p-4 rounded-2xl w-full mb-6"
+                        required>
+
+                    <textarea name="cover_letter"
+                        placeholder="Write your cover letter..."
+                        rows="6"
+                        class="border border-gray-200 p-4 rounded-2xl w-full focus:border-pink-600 focus:ring-2 focus:ring-pink-200 outline-none transition"></textarea>
+
+                </div>
+
+            </div>
+
+            <!-- SUBMIT -->
+            <div class="pt-4">
+
+                <button
+                    class="w-full bg-gradient-to-r from-blue-700 to-indigo-700 hover:from-blue-800 hover:to-indigo-800 text-white py-5 rounded-2xl text-lg font-bold shadow-xl transition duration-300 hover:scale-[1.01]">
+
+                    Submit Professional Application
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+</html>

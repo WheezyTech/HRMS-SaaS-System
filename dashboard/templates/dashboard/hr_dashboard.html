@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HR Analytics Dashboard</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body class="bg-gray-100 min-h-screen">
+
+<div class="p-8">
+
+    <!-- HEADER -->
+    <div class="flex items-center justify-between mb-8">
+
+        <div>
+            <h1 class="text-4xl font-bold text-gray-800">
+                HR Analytics Dashboard
+            </h1>
+
+            <p class="text-gray-500 mt-2">
+                Real-time HR monitoring and analytics
+            </p>
+        </div>
+
+        <div class="bg-green-100 text-green-700 px-5 py-3 rounded-xl font-semibold shadow">
+            ● Live Updates Enabled
+        </div>
+
+    </div>
+
+    <!-- KPI CARDS -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+
+        <!-- Employees -->
+        <div class="bg-white rounded-2xl shadow-lg p-6 border-l-4 border-blue-600">
+
+            <div class="flex items-center justify-between">
+
+                <div>
+                    <h2 class="text-gray-500 text-sm uppercase tracking-wide">
+                        Employees
+                    </h2>
+
+                    <p id="employees"
+                       class="text-4xl font-bold text-gray-800 mt-2">
+                        {{ total_employees }}
+                    </p>
+                </div>
+
+                <div class="text-5xl">
+                    👥
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Applications -->
+        <div class="bg-white rounded-2xl shadow-lg p-6 border-l-4 border-green-600">
+
+            <div class="flex items-center justify-between">
+
+                <div>
+                    <h2 class="text-gray-500 text-sm uppercase tracking-wide">
+                        Applications
+                    </h2>
+
+                    <p id="applications"
+                       class="text-4xl font-bold text-gray-800 mt-2">
+                        {{ total_applications }}
+                    </p>
+                </div>
+
+                <div class="text-5xl">
+                    📄
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Attendance -->
+        <div class="bg-white rounded-2xl shadow-lg p-6 border-l-4 border-yellow-500">
+
+            <div class="flex items-center justify-between">
+
+                <div>
+                    <h2 class="text-gray-500 text-sm uppercase tracking-wide">
+                        Attendance
+                    </h2>
+
+                    <p id="attendance"
+                       class="text-4xl font-bold text-gray-800 mt-2">
+                        {{ total_attendance }}
+                    </p>
+                </div>
+
+                <div class="text-5xl">
+                    ⏰
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Payroll -->
+        <div class="bg-white rounded-2xl shadow-lg p-6 border-l-4 border-purple-600">
+
+            <div class="flex items-center justify-between">
+
+                <div>
+                    <h2 class="text-gray-500 text-sm uppercase tracking-wide">
+                        Payroll
+                    </h2>
+
+                    <p id="payroll"
+                       class="text-4xl font-bold text-gray-800 mt-2">
+                        {{ total_payroll }}
+                    </p>
+                </div>
+
+                <div class="text-5xl">
+                    💰
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- CHART SECTION -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+        <!-- Payroll Trend -->
+        <div class="bg-white rounded-2xl shadow-lg p-6">
+
+            <div class="flex items-center justify-between mb-6">
+
+                <h2 class="text-xl font-bold text-gray-800">
+                    Payroll Trend
+                </h2>
+
+                <span class="text-sm text-gray-400">
+                    Monthly Overview
+                </span>
+
+            </div>
+
+            <canvas id="payrollChart"></canvas>
+
+        </div>
+
+        <!-- Recruitment Pipeline -->
+        <div class="bg-white rounded-2xl shadow-lg p-6">
+
+            <div class="flex items-center justify-between mb-6">
+
+                <h2 class="text-xl font-bold text-gray-800">
+                    Recruitment Pipeline
+                </h2>
+
+                <span class="text-sm text-gray-400">
+                    Hiring Progress
+                </span>
+
+            </div>
+
+            <canvas id="recruitmentChart"></canvas>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- CHARTS -->
+<script>
+
+    // Payroll Chart
+    new Chart(document.getElementById("payrollChart"), {
+        type: "bar",
+        data: {
+            labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+            datasets: [{
+                label: "Payroll",
+                data: [50000, 70000, 65000, 80000, 95000, 88000]
+            }]
+        },
+        options: {
+            responsive: true
+        }
+    });
+
+    // Recruitment Chart
+    new Chart(document.getElementById("recruitmentChart"), {
+        type: "doughnut",
+        data: {
+            labels: ["Applied", "Shortlisted", "Interviewed", "Hired"],
+            datasets: [{
+                data: [120, 60, 30, 15]
+            }]
+        },
+        options: {
+            responsive: true
+        }
+    });
+
+</script>
+
+<!-- LIVE KPI UPDATES -->
+<script>
+
+async function loadDashboard() {
+
+    try {
+
+        const response = await fetch("/api/dashboard-metrics/");
+        const data = await response.json();
+
+        // Update KPI Cards
+        document.getElementById("employees").innerText = data.employees;
+        document.getElementById("applications").innerText = data.applications;
+        document.getElementById("attendance").innerText = data.attendance;
+        document.getElementById("payroll").innerText = data.payroll;
+
+    } catch (error) {
+
+        console.error("Dashboard update failed:", error);
+
+    }
+}
+
+// Initial Load
+loadDashboard();
+
+// Auto Refresh Every 5 Seconds
+setInterval(loadDashboard, 5000);
+
+</script>
+
+<script>
+const socket = new WebSocket("ws://127.0.0.1:8000/ws/dashboard/");
+
+socket.onmessage = function(event) {
+    const data = JSON.parse(event.data);
+
+    document.getElementById("employees").innerText = data.employees;
+    document.getElementById("applications").innerText = data.applications;
+};
+</script>
+
+</body>
+</html>

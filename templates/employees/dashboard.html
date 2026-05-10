@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Employee Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100">
+
+    <a href="{% url 'profile_update' %}"
+        class="bg-blue-600 text-white px-4 py-2 rounded">
+        Edit Profile
+    </a>
+    
+    <a href="{% url 'apply_leave' %}" class="bg-green-600 text-white px-4 py-2 rounded">
+        Request Leave
+    </a>
+
+<div class="max-w-6xl mx-auto mt-8">
+
+    <!-- HEADER -->
+    <div class="bg-white p-6 rounded shadow mb-6">
+        <h1 class="text-2xl font-bold">Welcome, {{ employee.user.username }}</h1>
+        <p class="text-gray-500">Employee Self-Service Portal</p>
+    </div>
+
+    <!-- CARDS -->
+    <div class="grid grid-cols-3 gap-4 mb-6">
+
+        <div class="bg-blue-500 text-white p-4 rounded">
+            <h2 class="text-lg">Total Payroll Records</h2>
+            <p class="text-3xl font-bold">{{ payrolls|length }}</p>
+        </div>
+
+        <div class="bg-green-500 text-white p-4 rounded">
+            <h2 class="text-lg">Attendance Records</h2>
+            <p class="text-3xl font-bold">{{ attendance|length }}</p>
+        </div>
+
+        <div class="bg-purple-500 text-white p-4 rounded">
+            <h2 class="text-lg">Status</h2>
+            <p class="text-xl">Active</p>
+        </div>
+
+    </div>
+
+    <!-- PAYSLIPS -->
+    <div class="bg-white p-6 rounded shadow mb-6">
+        <h2 class="text-xl font-bold mb-4">Payslips</h2>
+
+        <table class="w-full border">
+            <tr class="bg-gray-200">
+                <th class="p-2">Month</th>
+                <th>Gross</th>
+                <th>Net</th>
+            </tr>
+
+            {% for p in payrolls %}
+            <tr class="border-t">
+                <td class="p-2">{{ p.month }}</td>
+                <td>{{ p.gross_salary }}</td>
+                <td>{{ p.net_salary }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    <!-- ATTENDANCE -->
+    <div class="bg-white p-6 rounded shadow">
+        <h2 class="text-xl font-bold mb-4">Attendance</h2>
+
+        <table class="w-full border">
+            <tr class="bg-gray-200">
+                <th class="p-2">Date</th>
+                <th>Check In</th>
+                <th>Check Out</th>
+            </tr>
+
+            {% for a in attendance %}
+            <tr class="border-t">
+                <td class="p-2">{{ a.date }}</td>
+                <td>{{ a.check_in }}</td>
+                <td>{{ a.check_out }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HR Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100">
+
+<!-- TOP NAV -->
+<div class="bg-white shadow p-4 flex justify-between items-center">
+    <h1 class="text-xl font-bold">HR Analytics Dashboard</h1>
+    <div class="text-sm text-gray-600">Welcome back 👋</div>
+</div>
+
+<!-- MAIN GRID -->
+<div class="p-6 grid grid-cols-1 md:grid-cols-4 gap-4">
+
+    <!-- KPI CARD 1 -->
+    <div class="bg-white p-5 rounded-xl shadow">
+        <h2 class="text-gray-500">Total Employees</h2>
+        <p class="text-3xl font-bold">{{ employees_count }}</p>
+    </div>
+
+    <!-- KPI CARD 2 -->
+    <div class="bg-white p-5 rounded-xl shadow">
+        <h2 class="text-gray-500">Applications</h2>
+        <p class="text-3xl font-bold">{{ applications_count }}</p>
+    </div>
+
+    <!-- KPI CARD 3 -->
+    <div class="bg-white p-5 rounded-xl shadow">
+        <h2 class="text-gray-500">Interviews</h2>
+        <p class="text-3xl font-bold">{{ interviews_count }}</p>
+    </div>
+
+    <!-- KPI CARD 4 -->
+    <div class="bg-white p-5 rounded-xl shadow">
+        <h2 class="text-gray-500">Hiring Rate</h2>
+        <p class="text-3xl font-bold text-green-600">72%</p>
+    </div>
+
+</div>
+
+<!-- CHART SECTION -->
+<div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+
+    <!-- BAR CHART -->
+    <div class="bg-white p-5 rounded-xl shadow">
+        <h3 class="font-bold mb-2">Recruitment Trends</h3>
+        <canvas id="recruitmentChart"></canvas>
+    </div>
+
+    <!-- PIE CHART -->
+    <div class="bg-white p-5 rounded-xl shadow">
+        <h3 class="font-bold mb-2">Employee Distribution</h3>
+        <canvas id="employeeChart"></canvas>
+    </div>
+
+</div>
+
+<!-- CHART JS -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+const recruitmentChart = new Chart(document.getElementById('recruitmentChart'), {
+    type: 'bar',
+    data: {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
+        datasets: [{
+            label: 'Applications',
+            data: [12, 19, 8, 15, 22],
+            backgroundColor: '#3b82f6'
+        }]
+    }
+});
+
+const employeeChart = new Chart(document.getElementById('employeeChart'), {
+    type: 'pie',
+    data: {
+        labels: ['Active', 'On Leave', 'New'],
+        datasets: [{
+            data: [60, 25, 15],
+            backgroundColor: ['#10b981', '#f59e0b', '#3b82f6']
+        }]
+    }
+});
+</script>
+
+</body>
+</html>

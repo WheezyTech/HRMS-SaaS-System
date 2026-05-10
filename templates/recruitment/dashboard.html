@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Recruitment Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100">
+
+<!-- HEADER -->
+<div class="bg-white shadow p-4 flex justify-between">
+    <h1 class="text-xl font-bold">Recruitment System</h1>
+    <a href="/recruitment/jobs/create/" class="bg-blue-600 text-white px-4 py-2 rounded">
+        + Post Job
+    </a>
+</div>
+
+<!-- STATS -->
+<div class="p-6 grid grid-cols-3 gap-4">
+
+    <div class="bg-white p-5 rounded shadow">
+        <h2 class="text-gray-500">Total Applications</h2>
+        <p class="text-3xl font-bold">{{ total_applications }}</p>
+    </div>
+
+    <div class="bg-white p-5 rounded shadow">
+        <h2 class="text-gray-500">Active Jobs</h2>
+        <p class="text-3xl font-bold">{{ active_jobs }}</p>
+    </div>
+
+    <div class="bg-white p-5 rounded shadow">
+        <h2 class="text-gray-500">Interviews</h2>
+        <p class="text-3xl font-bold">{{ interviews }}</p>
+    </div>
+
+</div>
+
+<!-- APPLICATION LIST -->
+<div class="p-6">
+
+    <h2 class="text-lg font-bold mb-4">Recent Applications</h2>
+
+    <div class="bg-white shadow rounded">
+
+        {% for app in applications %}
+        <div class="p-4 border-b flex justify-between items-center">
+
+            <div>
+                <h3 class="font-bold">{{ app.full_name }}</h3>
+                <p class="text-sm text-gray-500">{{ app.email }}</p>
+            </div>
+
+            <div class="flex gap-2 items-center">
+                <span class="px-3 py-1 rounded text-white text-sm
+                    {% if app.status == 'pending' %} bg-yellow-500
+                    {% elif app.status == 'interview' %} bg-blue-500
+                    {% else %} bg-green-500 {% endif %}">
+                    {{ app.status }}
+                </span>
+
+                <span class="text-sm text-gray-600">
+                    AI Score: {{ app.ai_score }}
+                </span>
+            </div>
+
+        </div>
+        {% endfor %}
+
+    </div>
+
+</div>
+
+</body>
+</html>

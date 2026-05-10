@@ -1,0 +1,6 @@
+services:
+  - type: web
+    name: hrms
+    env: python
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn hrms.wsgi:application"

@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HRMS Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100">
+
+<!-- TOP NAVBAR -->
+<nav class="bg-gray-900 text-white px-8 py-4 shadow-lg flex items-center justify-between">
+
+    <!-- Logo -->
+    <div class="flex items-center gap-3">
+
+        <div class="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center font-bold text-lg">
+            H
+        </div>
+
+        <div>
+            <h1 class="text-xl font-bold tracking-wide">
+                HRMS
+            </h1>
+
+            <p class="text-xs text-gray-400">
+                Human Resource Management System
+            </p>
+        </div>
+
+    </div>
+
+    <!-- Dynamic Navigation -->
+    <div class="flex items-center gap-4">
+
+        <!-- Common -->
+        <a href="/dashboard/"
+           class="hover:text-blue-400 transition">
+            Dashboard
+        </a>
+
+        <!-- Admin -->
+        {% if request.user.role == "admin" %}
+
+            <a href="/admin-dashboard/"
+               class="hover:text-blue-400 transition">
+                Admin Panel
+            </a>
+
+            <a href="/employees/"
+               class="hover:text-blue-400 transition">
+                Employees
+            </a>
+
+            <a href="/recruitment/dashboard/"
+               class="hover:text-blue-400 transition">
+                Recruitment
+            </a>
+
+            <a href="/payroll/"
+               class="hover:text-blue-400 transition">
+                Payroll
+            </a>
+
+            <a href="/performance/"
+               class="hover:text-blue-400 transition">
+                Performance
+            </a>
+
+        {% endif %}
+
+        <!-- HR -->
+        {% if request.user.role == "hr" %}
+
+            <a href="/employees/"
+               class="hover:text-blue-400 transition">
+                Employees
+            </a>
+
+            <a href="/recruitment/dashboard/"
+               class="hover:text-blue-400 transition">
+                Recruitment
+            </a>
+
+            <a href="/attendance/"
+               class="hover:text-blue-400 transition">
+                Attendance
+            </a>
+
+            <a href="/payroll/"
+               class="hover:text-blue-400 transition">
+                Payroll
+            </a>
+
+        {% endif %}
+
+        <!-- Employee -->
+        {% if request.user.role == "employee" %}
+
+            <a href="/attendance/"
+               class="hover:text-blue-400 transition">
+                Attendance
+            </a>
+
+            <a href="/employee/dashboard/"
+               class="hover:text-blue-400 transition">
+                My Dashboard
+            </a>
+
+            <a href="/leave/"
+               class="hover:text-blue-400 transition">
+                Leave
+            </a>
+
+            <a href="/profile/"
+               class="hover:text-blue-400 transition">
+                Profile
+            </a>
+
+        {% endif %}
+
+    </div>
+
+    <!-- User Area -->
+    <div class="flex items-center gap-4">
+
+        <!-- Role Badge -->
+        <span class="bg-blue-600 text-xs px-3 py-1 rounded-full uppercase">
+            {{ request.user.role }}
+        </span>
+
+        <!-- Username -->
+        <div class="text-sm">
+            {{ request.user.username }}
+        </div>
+
+        <!-- Logout -->
+        <a href="/logout/"
+           class="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-lg transition">
+            Logout
+        </a>
+
+    </div>
+
+</nav>
+
+<!-- PAGE LAYOUT -->
+<div class="flex">
+
+    <!-- SIDEBAR -->
+    <aside class="w-64 bg-white shadow-lg min-h-screen p-6">
+
+        <div class="mb-8">
+
+            <h2 class="text-2xl font-bold text-gray-800">
+                Control Panel
+            </h2>
+
+            <p class="text-sm text-gray-500 mt-1">
+                Welcome back,
+                <span class="font-semibold">
+                    {{ request.user.username }}
+                </span>
+            </p>
+
+        </div>
+
+        <!-- Sidebar Menu -->
+        <ul class="space-y-2">
+
+            <!-- Common -->
+            <li>
+                <a href="/dashboard/"
+                   class="block px-4 py-3 rounded-xl hover:bg-blue-50 hover:text-blue-600 transition">
+                    Dashboard
+                </a>
+            </li>
+
+            <!-- Admin -->
+            {% if request.user.role == "admin" %}
+
+            <li>
+                <a href="/admin-dashboard/"
+                   class="block px-4 py-3 rounded-xl hover:bg-blue-50 hover:text-blue-600 transition">
+                    Admin Management
+                </a>
+            </li>
+
+            <li>
+                <a href="/employees/"
+                   class="block px-4 py-3 rounded-xl hover:bg-blue-50 hover:text-blue-600 transition">
+                    Employee Management
+                </a>
+            </li>
+
+            <li>
+                <a href="/recruitment/dashboard/"
+                   class="block px-4 py-3 rounded-xl hover:bg-blue-50 hover:text-blue-600 transition">
+                    Recruitment
+                </a>
+            </li>
+
+            <li>
+                <a href="/payroll/"
+                   class="block px-4 py-3 rounded-xl hover:bg-blue-50 hover:text-blue-600 transition">
+                    Payroll System
+                </a>
+            </li>
+
+            <li>
+                <a href="/reports/"
+                   class="block px-4 py-3 rounded-xl hover:bg-blue-50 hover:text-blue-600 transition">
+                    Reports & Analytics
+                </a>
+            </li>
+
+            {% endif %}
+
+            <!-- HR -->
+            {% if request.user.role == "hr" %}
+
+            <li>
+                <a href="/employees/"
+                   class="block px-4 py-3 rounded-xl hover:bg-blue-50 hover:text-blue-600 transition">
+                    Employees
+                </a>
+            </li>
+
+            <li>
+                <a href="/attendance/"
+                   class="block px-4 py-3 rounded-xl hover:bg-blue-50 hover:text-blue-600 transition">
+                    Attendance
+                </a>
+            </li>
+
+            <li>
+                <a href="/recruitment/dashboard/"
+                   class="block px-4 py-3 rounded-xl hover:bg-blue-50 hover:text-blue-600 transition">
+                    Recruitment
+                </a>
+            </li>
+
+            <li>
+                <a href="/payroll/"
+                   class="block px-4 py-3 rounded-xl hover:bg-blue-50 hover:text-blue-600 transition">
+                    Payroll
+                </a>
+            </li>
+
+            {% endif %}
+
+            <!-- Employee -->
+            {% if request.user.role == "employee" %}
+
+            <li>
+                <a href="/employee/dashboard/"
+                   class="block px-4 py-3 rounded-xl hover:bg-blue-50 hover:text-blue-600 transition">
+                    My Dashboard
+                </a>
+            </li>
+
+            <li>
+                <a href="/attendance/"
+                   class="block px-4 py-3 rounded-xl hover:bg-blue-50 hover:text-blue-600 transition">
+                    My Attendance
+                </a>
+            </li>
+
+            <li>
+                <a href="/leave/"
+                   class="block px-4 py-3 rounded-xl hover:bg-blue-50 hover:text-blue-600 transition">
+                    Leave Requests
+                </a>
+            </li>
+
+            <li>
+                <a href="/profile/"
+                   class="block px-4 py-3 rounded-xl hover:bg-blue-50 hover:text-blue-600 transition">
+                    My Profile
+                </a>
+            </li>
+
+            {% endif %}
+
+        </ul>
+
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="flex-1 p-8">
+
+        <!-- Page Card -->
+        <div class="bg-white rounded-2xl shadow p-8 min-h-[500px]">
+
+            {% block content %}
+            {% endblock %}
+
+        </div>
+
+    </main>
+
+</div>
+
+</body>
+</html>

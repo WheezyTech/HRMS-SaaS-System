@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ job.title }}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 min-h-screen">
+
+<div class="max-w-5xl mx-auto py-10 px-6">
+
+    <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+
+        <!-- HEADER -->
+        <div class="bg-gradient-to-r from-blue-700 to-indigo-700 text-white p-8">
+
+            <h1 class="text-4xl font-bold">
+                {{ job.title }}
+            </h1>
+
+            <p class="mt-2 text-blue-100">
+                {{ job.department|default:"General" }} • {{ job.location }}
+            </p>
+
+            {% if job.is_active %}
+            <span class="inline-block mt-4 bg-white text-blue-700 px-3 py-1 rounded-full text-sm font-semibold">
+                Open Position
+            </span>
+            {% endif %}
+
+        </div>
+
+        <!-- CONTENT -->
+        <div class="p-8">
+
+            <!-- DESCRIPTION -->
+            <div class="mb-8">
+                <h2 class="text-2xl font-bold mb-3">Job Description</h2>
+                <p class="text-gray-700 whitespace-pre-line">
+                    {{ job.description }}
+                </p>
+            </div>
+
+            <!-- REQUIREMENTS -->
+            <div class="mb-8">
+                <h2 class="text-2xl font-bold mb-3">Requirements</h2>
+                <p class="text-gray-700 whitespace-pre-line">
+                    {{ job.requirements }}
+                </p>
+            </div>
+
+            <!-- APPLY BUTTON -->
+            <div class="border-t pt-6 flex justify-between items-center">
+
+                <p class="text-gray-500">
+                    Ready to apply for this position?
+                </p>
+
+                <a href="{% url 'apply_job' job.id %}"
+                   class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-xl font-semibold">
+                    Apply Now
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Job</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100">
+
+<div class="max-w-3xl mx-auto mt-10 bg-white p-6 rounded shadow">
+
+    <h1 class="text-2xl font-bold mb-6">Post a New Job</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <!-- TITLE -->
+        <div class="mb-4">
+            <label class="block font-medium">Job Title</label>
+            <input type="text" name="title" class="w-full border p-2 rounded" required>
+        </div>
+
+        <!-- DESCRIPTION -->
+        <div class="mb-4">
+            <label class="block font-medium">Job Description</label>
+            <textarea name="description" class="w-full border p-2 rounded h-24"></textarea>
+        </div>
+
+        <!-- REQUIREMENTS -->
+        <div class="mb-4">
+            <label class="block font-medium">Requirements</label>
+            <textarea name="requirements" class="w-full border p-2 rounded h-24"></textarea>
+        </div>
+
+        <!-- LOCATION -->
+        <div class="mb-4">
+            <label class="block font-medium">Location</label>
+            <input type="text" name="location" class="w-full border p-2 rounded">
+        </div>
+
+        <!-- SALARY -->
+        <div class="mb-4">
+            <label class="block font-medium">Salary</label>
+            <input type="number" name="salary" class="w-full border p-2 rounded">
+        </div>
+
+        <!-- BUTTON -->
+        <button class="bg-blue-600 text-white px-6 py-2 rounded">
+            Publish Job
+        </button>
+
+    </form>
+
+</div>
+
+</body>
+</html>
