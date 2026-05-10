@@ -4,7 +4,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.shortcuts import redirect
 from django.contrib.auth import views as auth_views
-
+from recruitment.views import job_list
 from accounts.views import hr_dashboard, login_success
 
 
@@ -18,7 +18,7 @@ urlpatterns = [
     path('payroll/', include('payroll.urls')),
     path('accounts/', include('accounts.urls')),
 
-    path('', lambda request: redirect('/dashboard/')),
+    path('', job_list, name='home'),
 
     # 📊 DASHBOARD
     path('dashboard/', hr_dashboard, name='hr_dashboard'),
